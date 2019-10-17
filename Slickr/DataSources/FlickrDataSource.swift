@@ -55,7 +55,8 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         return [
             "api_key": Constants.Flickr.APIKey,
             "format": "json",
-            "media": "photos"
+            "media": "photos",
+            "nojsoncallback": 1
         ]
     }
 
@@ -71,12 +72,12 @@ final class DefaultFlickrDataSource: FlickrDataSource {
     private func getPhotos(parameters: [String: Any], completion: @escaping FlickrPhotosResponseHandler) {
         let requestInfo = RequestInfo(url: Constants.Flickr.baseURL, parameters: parameters)
 
-        networkEngine.get(with: requestInfo) { [weak self] result in
-            self?.handlePhotosResponse(result: result, completion: completion)
+        networkEngine.get(with: requestInfo) { result in
+            DefaultFlickrDataSource.handlePhotosResponse(result: result, completion: completion)
         }
     }
 
-    private func handlePhotosResponse(result: Result<Data?, Error>, completion: @escaping FlickrPhotosResponseHandler) {
+    private static func handlePhotosResponse(result: Result<Data?, Error>, completion: @escaping FlickrPhotosResponseHandler) {
         switch result {
         case let .success(data):
             guard let data = data else {

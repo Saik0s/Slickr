@@ -7,11 +7,14 @@ import Foundation
 @testable import Slickr
 
 final class MockedNetworkEngine: NetworkEngine {
-    func get(url: URL, parameters: [String: Any], completion: @escaping ResponseHandler) {
+    var get: ((RequestInfo, @escaping ResponseHandler) -> Void)?
+    var post: ((RequestInfo, @escaping ResponseHandler) -> Void)?
 
+    func get(with info: RequestInfo, completion: @escaping ResponseHandler) {
+        get?(info, completion)
     }
 
-    func post(url: URL, parameters: [String: Any], completion: @escaping ResponseHandler) {
-
+    func post(with info: RequestInfo, completion: @escaping ResponseHandler) {
+        post?(info, completion)
     }
 }

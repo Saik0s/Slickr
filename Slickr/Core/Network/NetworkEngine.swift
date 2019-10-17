@@ -42,7 +42,7 @@ final class DefaultNetworkEngine: NetworkEngine {
 
     private func performRequest(with info: RequestInfo, method: HTTPMethod, completion: @escaping ResponseHandler) {
         do {
-            let request = try createRequest(for: url, method: method, parameters: parameters)
+            let request = try createRequest(with: info, method: method)
             print("Request: \(request)")
             let task = session.dataTask(with: request) { data, response, error in
                 // Check fo error
@@ -71,13 +71,13 @@ final class DefaultNetworkEngine: NetworkEngine {
         }
     }
 
-    private func createRequest(for url: URL, method: HTTPMethod, parameters: [String: Any]) throws -> URLRequest {
+    private func createRequest(with info: RequestInfo, method: HTTPMethod) throws -> URLRequest {
         switch method {
         case .GET:
-            var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            var components = URLComponents(url: info.url, resolvingAgainstBaseURL: false)
 
-            if !parameters.isEmpty {
-                components?.queryItems = parameters.map { (key, value) in
+            if !info.parameters.isEmpty {
+                components?.queryItems = info.parameters.map { (key, value) in
                     URLQueryItem(name: key, value: "\(value)")
                 }
             }
@@ -92,11 +92,11 @@ final class DefaultNetworkEngine: NetworkEngine {
             return request
 
         case .POST:
-            var request = URLRequest(url: url)
+            var request = URLRequest(url: info.url)
             request.httpMethod = method.rawValue
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                request.httpBody = try JSONSerialization.data(withJSONObject: info.parameters, options: .prettyPrinted)
             } catch {
                 throw NetworkError.cantSetBody(error)
             }
