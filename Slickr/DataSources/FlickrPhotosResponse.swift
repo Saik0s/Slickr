@@ -5,20 +5,20 @@
 
 // MARK: - FlickrPhotosResponse
 struct FlickrPhotosResponse: Codable {
-    let photos: Photos
+    let photos: FlickrPhotos
 }
 
-// MARK: - Photos
-struct Photos: Codable {
-    let page: Int
-    let pages: Int
-    let perpage: Int
-    let total: String
-    let photo: [Photo]
+// MARK: - FlickrPhotos
+struct FlickrPhotos: Codable {
+    let page: UInt
+    let pages: UInt
+    let perpage: UInt
+    let total: UInt
+    let photo: [FlickrPhotoInfo]
 }
 
-// MARK: - Photo
-struct Photo: Codable {
+// MARK: - FlickrPhotoInfo
+struct FlickrPhotoInfo: Codable {
     let id, owner, secret, server: String
     let farm: Int
     let title: String
