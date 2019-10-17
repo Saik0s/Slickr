@@ -3,8 +3,6 @@
 // Licensed under the MIT license
 //
 
-import XCTest
-@testable import Slickr
+protocol ImageService: AnyObject {}
 
-class SlickrTests: XCTestCase {
-}
+final class DefaultImageService: ImageService {}
