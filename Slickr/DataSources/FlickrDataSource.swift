@@ -15,8 +15,11 @@ enum FlickrError: Error {
 typealias FlickrPhotosResponseHandler = (Result<FlickrPhotosResponse, FlickrError>) -> Void
 
 protocol FlickrDataSource: AnyObject {
-    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler)
-    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler)
+    @discardableResult
+    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable?
+
+    @discardableResult
+    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable?
 }
 
 final class DefaultFlickrDataSource: FlickrDataSource {
@@ -31,7 +34,7 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         self.networkEngine = networkEngine
     }
 
-    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) {
+    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         guard !query.isEmpty else {
             completion(.failure(FlickrError.emptySearchQuery))
             return
@@ -40,13 +43,13 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         var parameters = baseParameters(method: Methods.search, limit: limit, page: page)
         parameters["text"] = query
 
-        getPhotos(parameters: parameters, completion: completion)
+        return getPhotos(parameters: parameters, completion: completion)
     }
 
-    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) {
+    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         let parameters = baseParameters(method: Methods.recent, limit: limit, page: page)
 
-        getPhotos(parameters: parameters, completion: completion)
+        return getPhotos(parameters: parameters, completion: completion)
     }
 
     // MARK: - Private Helpers
@@ -69,10 +72,10 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         return parameters
     }
 
-    private func getPhotos(parameters: [String: Any], completion: @escaping FlickrPhotosResponseHandler) {
+    private func getPhotos(parameters: [String: Any], completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         let requestInfo = RequestInfo(url: Constants.Flickr.baseURL, parameters: parameters)
 
-        networkEngine.get(with: requestInfo) { result in
+        return networkEngine.get(with: requestInfo) { result in
             DefaultFlickrDataSource.handlePhotosResponse(result: result, completion: completion)
         }
     }

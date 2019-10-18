@@ -4,7 +4,8 @@
 //
 
 protocol FeedService {
-    func search(with query: String, page: UInt, completion: @escaping (Result<FeedPage, Error>) -> Void)
+    @discardableResult
+    func search(with query: String, page: UInt, completion: @escaping (Result<FeedPage, Error>) -> Void) -> Cancelable?
 }
 
 final class DefaultFeedService: FeedService {
@@ -18,7 +19,7 @@ final class DefaultFeedService: FeedService {
         self.imageURLBuilder = imageURLBuilder
     }
 
-    func search(with query: String, page: UInt, completion: @escaping (Result<FeedPage, Error>) -> Void) {
+    func search(with query: String, page: UInt, completion: @escaping (Result<FeedPage, Error>) -> Void) -> Cancelable? {
         let requestCompletion: FlickrPhotosResponseHandler = { result in
             switch result {
             case let .success(response):
@@ -38,9 +39,9 @@ final class DefaultFeedService: FeedService {
         }
 
         if query.isEmpty {
-            dataSource.recent(limit: photosPerPage, page: page, completion: requestCompletion)
+            return dataSource.recent(limit: photosPerPage, page: page, completion: requestCompletion)
         } else {
-            dataSource.search(with: query, limit: photosPerPage, page: page, completion: requestCompletion)
+            return dataSource.search(with: query, limit: photosPerPage, page: page, completion: requestCompletion)
         }
     }
 }

@@ -12,7 +12,7 @@ final class MockedFlickrDataSource: FlickrDataSource {
     var invokedSearchParametersList = [(query: String, limit: UInt, page: UInt)]()
     var stubbedSearchCompletionResult: (Result<FlickrPhotosResponse, FlickrError>, Void)?
 
-    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) {
+    func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         invokedSearch = true
         invokedSearchCount += 1
         invokedSearchParameters = (query, limit, page)
@@ -20,6 +20,7 @@ final class MockedFlickrDataSource: FlickrDataSource {
         if let result = stubbedSearchCompletionResult {
             completion(result.0)
         }
+        return nil
     }
 
     var invokedRecent = false
@@ -28,7 +29,7 @@ final class MockedFlickrDataSource: FlickrDataSource {
     var invokedRecentParametersList = [(limit: UInt, page: UInt)]()
     var stubbedRecentCompletionResult: (Result<FlickrPhotosResponse, FlickrError>, Void)?
 
-    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) {
+    func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         invokedRecent = true
         invokedRecentCount += 1
         invokedRecentParameters = (limit, page)
@@ -36,5 +37,6 @@ final class MockedFlickrDataSource: FlickrDataSource {
         if let result = stubbedRecentCompletionResult {
             completion(result.0)
         }
+        return nil
     }
 }

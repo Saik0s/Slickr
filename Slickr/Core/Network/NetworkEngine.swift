@@ -17,8 +17,13 @@ enum NetworkError: Error {
 protocol NetworkEngine: AnyObject {
     typealias ResponseHandler = (Result<Data?, Error>) -> Void
 
-    func get(with info: RequestInfo, completion: @escaping ResponseHandler)
-    func post(with info: RequestInfo, completion: @escaping ResponseHandler)
+    // Perform Get Request
+    @discardableResult
+    func get(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable?
+
+    // Perform Post Request with body as a JSON
+    @discardableResult
+    func post(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable?
 }
 
 final class DefaultNetworkEngine: NetworkEngine {
@@ -32,15 +37,15 @@ final class DefaultNetworkEngine: NetworkEngine {
         self.session = session
     }
 
-    func get(with info: RequestInfo, completion: @escaping ResponseHandler) {
-        performRequest(with: info, method: .GET, completion: completion)
+    func get(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
+        return performRequest(with: info, method: .GET, completion: completion)
     }
 
-    func post(with info: RequestInfo, completion: @escaping ResponseHandler) {
-        performRequest(with: info, method: .POST, completion: completion)
+    func post(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
+        return performRequest(with: info, method: .POST, completion: completion)
     }
 
-    private func performRequest(with info: RequestInfo, method: HTTPMethod, completion: @escaping ResponseHandler) {
+    private func performRequest(with info: RequestInfo, method: HTTPMethod, completion: @escaping ResponseHandler) -> Cancelable? {
         do {
             let request = try createRequest(with: info, method: method)
             print("Request: \(request)")
@@ -66,8 +71,10 @@ final class DefaultNetworkEngine: NetworkEngine {
             }
 
             task.resume()
+            return task
         } catch {
             completion(.failure(error))
+            return nil
         }
     }
 

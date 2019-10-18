@@ -21,6 +21,7 @@ final class DefaultFlickrDataSourceTests: XCTestCase {
     func test_search_withCorrectQuery_shouldReturnItems() {
         networkEngine.get = { _, completion in
             DefaultFlickrDataSourceTests.jsonDataFromFile("search", completion: completion)
+            return nil
         }
 
         let itemsExpectation = expectation(description: "Wait for response with items")
@@ -42,6 +43,7 @@ final class DefaultFlickrDataSourceTests: XCTestCase {
     func test_recent_shouldReturnItems() {
         networkEngine.get = { _, completion in
             DefaultFlickrDataSourceTests.jsonDataFromFile("recent", completion: completion)
+            return nil
         }
 
         let itemsExpectation = expectation(description: "Wait for response with items")
