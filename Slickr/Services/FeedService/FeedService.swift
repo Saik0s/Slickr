@@ -14,7 +14,7 @@ final class DefaultFeedService: FeedService {
     private let dataSource: FlickrDataSource
     private let imageURLBuilder: ImageURLBuilder
 
-    init(dataSource: FlickrDataSource, imageURLBuilder: ImageURLBuilder = DefaultImageURLBuilder()) {
+    init(dataSource: FlickrDataSource, imageURLBuilder: ImageURLBuilder) {
         self.dataSource = dataSource
         self.imageURLBuilder = imageURLBuilder
     }
@@ -29,7 +29,7 @@ final class DefaultFeedService: FeedService {
                     return PhotoInfo(id: photo.id, title: photo.title, url: url)
                 }
 
-                let page = FeedPage(page: response.photos.page, totalPages: response.photos.total, photos: photoInfos)
+                let page = FeedPage(page: response.photos.page, totalPages: response.photos.pages, photos: photoInfos)
 
                 completion(.success(page))
 

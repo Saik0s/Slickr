@@ -8,8 +8,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+    private let dependencies = Dependencies.resolve()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let searchScreenFactory = DefaultSearchScreenFactory()
+        let photoCellFactory = DefaultPhotoCellFactory(imageService: dependencies.imageService)
+        let searchScreenFactory = DefaultSearchScreenFactory(feedService: dependencies.feedService, photoCellFactory: photoCellFactory)
         let searchViewController = searchScreenFactory.createSearchScreen().asViewController
         let navigationController = UINavigationController(rootViewController: searchViewController)
 

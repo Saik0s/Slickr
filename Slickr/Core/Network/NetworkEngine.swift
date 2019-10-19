@@ -38,17 +38,17 @@ final class DefaultNetworkEngine: NetworkEngine {
     }
 
     func get(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
-        return performRequest(with: info, method: .GET, completion: completion)
+        performRequest(with: info, method: .GET, completion: completion)
     }
 
     func post(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
-        return performRequest(with: info, method: .POST, completion: completion)
+        performRequest(with: info, method: .POST, completion: completion)
     }
 
     private func performRequest(with info: RequestInfo, method: HTTPMethod, completion: @escaping ResponseHandler) -> Cancelable? {
         do {
             let request = try createRequest(with: info, method: method)
-            print("Request: \(request)")
+            print("Request to: \(request.url?.absoluteString ?? "")")
             let task = session.dataTask(with: request) { data, response, error in
                 // Check fo error
                 guard let data = data,
@@ -59,7 +59,7 @@ final class DefaultNetworkEngine: NetworkEngine {
                     return
                 }
 
-                print("Response: \(response)")
+                print("Response from: \(response.url?.absoluteString ?? "")")
 
                 // Check status code
                 guard (200 ... 299) ~= response.statusCode else {

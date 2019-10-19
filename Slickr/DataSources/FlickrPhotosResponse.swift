@@ -13,7 +13,6 @@ struct FlickrPhotos: Codable {
     let page: UInt
     let pages: UInt
     let perpage: UInt
-    let total: UInt
     let photo: [FlickrPhotoInfo]
 }
 

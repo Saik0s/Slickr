@@ -14,7 +14,7 @@ final class DefaultFeedServiceTests: XCTestCase {
         super.setUp()
 
         dataSource = MockedFlickrDataSource()
-        feedService = DefaultFeedService(dataSource: dataSource)
+        feedService = DefaultFeedService(dataSource: dataSource, imageURLBuilder: DefaultImageURLBuilder())
     }
 
     func test_search_withEmptyQuery_shouldCallRecent() {

@@ -37,7 +37,7 @@ final class DefaultFlickrDataSource: FlickrDataSource {
     func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         guard !query.isEmpty else {
             completion(.failure(FlickrError.emptySearchQuery))
-            return
+            return nil
         }
 
         var parameters = baseParameters(method: Methods.search, limit: limit, page: page)
