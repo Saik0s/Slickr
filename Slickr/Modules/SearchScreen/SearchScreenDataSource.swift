@@ -35,15 +35,12 @@ final class DefaultSearchScreenDataSource: NSObject, SearchScreenDataSource {
     }
 
     func set(items: [PhotoInfo]) {
-        print("\(type(of: self)).\(#function)")
-
         self.items = items
 
         collectionView?.reloadData()
     }
 
     func append(items: [PhotoInfo]) {
-        print("\(type(of: self)).\(#function)")
         let newIndexPaths = items.enumerated().map { index, _ in IndexPath(item: index + self.count, section: 0) }
         self.items.append(contentsOf: items)
 

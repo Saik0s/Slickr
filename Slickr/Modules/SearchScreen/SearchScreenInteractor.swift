@@ -11,7 +11,7 @@ protocol SearchScreenInteractor: AnyObject {
     func loadNextPage()
 }
 
-final class DefaultSearchScreenInteractor: SearchScreenInteractor, CustomStringConvertible {
+final class DefaultSearchScreenInteractor: SearchScreenInteractor {
     private var currentQuery = ""
     private var currentPage: UInt = 0
     private var totalPages: UInt = 0
@@ -27,14 +27,12 @@ final class DefaultSearchScreenInteractor: SearchScreenInteractor, CustomStringC
     }
 
     func search(for query: String) {
-        print(#function + " \(query)")
         currentQuery = query
 
         reload()
     }
 
     func reload() {
-        print(#function)
         currentPage = 0
         totalPages = 0
 
@@ -42,7 +40,6 @@ final class DefaultSearchScreenInteractor: SearchScreenInteractor, CustomStringC
     }
 
     func loadNextPage() {
-        print(#function + "\(self)")
         guard !isLoadingNextPage else { return }
         guard currentPage < totalPages else { return }
 
@@ -64,15 +61,11 @@ final class DefaultSearchScreenInteractor: SearchScreenInteractor, CustomStringC
                     self?.totalPages = page.totalPages
                     self?.presenter.loadedNewPage(page)
                 case let .failure(error):
-                    print(error)
+                    print("\(#function) Error: \(error)")
                     self?.presenter.loadedNewPage(FeedPage(page: page, totalPages: total, photos: []))
                 }
             }
         }
-    }
-
-    var description: String {
-        "DefaultSearchScreenInteractor(currentQuery: \(currentQuery), currentPage: \(currentPage), totalPages: \(totalPages), isLoadingNextPage: \(isLoadingNextPage), currentTask: \(currentTask), feedService: \(feedService), presenter: \(presenter))"
     }
 }
 

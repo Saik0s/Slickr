@@ -48,18 +48,14 @@ final class DefaultNetworkEngine: NetworkEngine {
     private func performRequest(with info: RequestInfo, method: HTTPMethod, completion: @escaping ResponseHandler) -> Cancelable? {
         do {
             let request = try createRequest(with: info, method: method)
-            print("Request to: \(request.url?.absoluteString ?? "")")
             let task = session.dataTask(with: request) { data, response, error in
                 // Check fo error
                 guard let data = data,
                     let response = response as? HTTPURLResponse,
                     error == nil else {
-                    print("Error: \(String(describing: error))")
                     completion(.failure(error ?? NetworkError.unknown))
                     return
                 }
-
-                print("Response from: \(response.url?.absoluteString ?? "")")
 
                 // Check status code
                 guard (200 ... 299) ~= response.statusCode else {
