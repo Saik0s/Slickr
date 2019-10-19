@@ -36,11 +36,10 @@ final class DefaultSearchScreenDataSource: NSObject, SearchScreenDataSource {
 
     func set(items: [PhotoInfo]) {
         print("\(type(of: self)).\(#function)")
+
         self.items = items
 
-        collectionView?.performBatchUpdates({
-            self.collectionView?.reloadData()
-        })
+        collectionView?.reloadData()
     }
 
     func append(items: [PhotoInfo]) {

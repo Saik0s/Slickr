@@ -14,7 +14,7 @@ final class DefaultImageService: ImageService {
         case noData
     }
 
-    private var cache: [String: Data] = [:]
+    private let imageCache = NSCache<AnyObject, AnyObject>()
     private let cacheQueue = DispatchQueue(label: "Cache")
 
     private let networkEngine: NetworkEngine
@@ -25,7 +25,7 @@ final class DefaultImageService: ImageService {
 
     func loadImage(for photoInfo: PhotoInfo, completion: @escaping (Result<Data, Swift.Error>) -> Void) -> Cancelable? {
         // Try to get cached first
-        if let data = cache[photoInfo.id] {
+        if let data = imageCache.object(forKey: photoInfo.url as AnyObject) as? Data {
             completion(.success(data))
             return nil
         }
@@ -44,7 +44,7 @@ final class DefaultImageService: ImageService {
 
                 // Save to cache
                 self?.cacheQueue.async {
-                    self?.cache[photoInfo.id] = data
+                    self?.imageCache.setObject(data as AnyObject, forKey: photoInfo.url as AnyObject)
                 }
 
                 completion(.success(data))

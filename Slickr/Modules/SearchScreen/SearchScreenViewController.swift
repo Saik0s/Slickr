@@ -12,6 +12,7 @@ protocol SearchScreenViewInput: AnyObject {
 
 final class SearchScreenViewController: UIViewController, SearchScreenViewInput {
     private let spacing: CGFloat = 10.0
+    private let numberOfItemsInRow = 3
     private let refreshControl = UIRefreshControl()
     private let searchController = UISearchController(searchResultsController: nil)
 
@@ -61,13 +62,15 @@ final class SearchScreenViewController: UIViewController, SearchScreenViewInput 
         dataSource.register(collectionView: collectionView)
         collectionView.delegate = self
 
+        collectionView.keyboardDismissMode = .interactive
+
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red:0.49, green:0.84, blue:0.87, alpha:1.0)
+        refreshControl.tintColor = UIColor(red: 0.49, green: 0.84, blue: 0.87, alpha: 1.0)
     }
 
     private func setupSearchController() {
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         if #available(iOS 11.0, *) {
@@ -84,6 +87,8 @@ final class SearchScreenViewController: UIViewController, SearchScreenViewInput 
         interactor.reload()
     }
 
+    // MARK: - SearchScreenViewInput
+
     func new(items: [PhotoInfo]) {
         dataSource.set(items: items)
         refreshControl.endRefreshing()
@@ -94,40 +99,48 @@ final class SearchScreenViewController: UIViewController, SearchScreenViewInput 
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+
 extension SearchScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-
-        let numberOfItem: CGFloat = 3
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
 
         let collectionViewWidth = self.collectionView.bounds.width
 
-        let extraSpace = (numberOfItem - 1) * flowLayout.minimumInteritemSpacing
+        let extraSpace = CGFloat(numberOfItemsInRow - 1) * flowLayout.minimumInteritemSpacing
 
         let inset = flowLayout.sectionInset.right + flowLayout.sectionInset.left
 
-        let width = Int((collectionViewWidth - extraSpace - inset) / numberOfItem)
+        let width = Int((collectionViewWidth - extraSpace - inset) / CGFloat(numberOfItemsInRow))
 
         return CGSize(width: width, height: width)
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
 extension SearchScreenViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard dataSource.count > 0 else { return }
 
-        if indexPath.row == dataSource.count - 5 {
+        if indexPath.row == dataSource.count - 10 {
             interactor.loadNextPage()
         }
     }
 }
 
-extension SearchScreenViewController: UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
+// MARK: - UISearchBarDelegate
+
+extension SearchScreenViewController: UISearchBarDelegate {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         interactor.search(for: searchController.searchBar.text ?? "")
+    }
+
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        interactor.search(for: "")
     }
 }

@@ -17,7 +17,7 @@ protocol PhotoCellInput: AnyObject {
 final class PhotoCollectionViewCell: UICollectionViewCell, PhotoCellInput {
     static let reuseIdentifier = NSStringFromClass(PhotoCollectionViewCell.self)
 
-    private lazy var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -35,9 +35,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell, PhotoCellInput {
     var interactor: PhotoCellInteractor?
 
     override var bounds: CGRect {
-        didSet {
-            layout()
-        }
+        didSet { layout() }
     }
 
     override init(frame: CGRect) {

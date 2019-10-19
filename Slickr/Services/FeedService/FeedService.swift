@@ -9,7 +9,7 @@ protocol FeedService {
 }
 
 final class DefaultFeedService: FeedService {
-    private let photosPerPage: UInt = 20
+    private let photosPerPage: UInt = 40
 
     private let dataSource: FlickrDataSource
     private let imageURLBuilder: ImageURLBuilder
