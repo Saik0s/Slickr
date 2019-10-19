@@ -11,10 +11,10 @@ final class MockedNetworkEngine: NetworkEngine {
     var post: ((RequestInfo, @escaping ResponseHandler) -> Cancelable?)?
 
     func get(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
-        return get?(info, completion)
+        get?(info, completion)
     }
 
     func post(with info: RequestInfo, completion: @escaping ResponseHandler) -> Cancelable? {
-        return post?(info, completion)
+        post?(info, completion)
     }
 }

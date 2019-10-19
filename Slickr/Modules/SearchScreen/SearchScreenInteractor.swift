@@ -11,7 +11,7 @@ protocol SearchScreenInteractor: AnyObject {
     func loadNextPage()
 }
 
-final class DefaultSearchScreenInteractor: SearchScreenInteractor {
+final class DefaultSearchScreenInteractor: SearchScreenInteractor, CustomStringConvertible {
     private var currentQuery = ""
     private var currentPage: UInt = 0
     private var totalPages: UInt = 0
@@ -42,7 +42,7 @@ final class DefaultSearchScreenInteractor: SearchScreenInteractor {
     }
 
     func loadNextPage() {
-        print(#function)
+        print(#function + "\(self)")
         guard !isLoadingNextPage else { return }
         guard currentPage < totalPages else { return }
 
@@ -69,6 +69,10 @@ final class DefaultSearchScreenInteractor: SearchScreenInteractor {
                 }
             }
         }
+    }
+
+    var description: String {
+        "DefaultSearchScreenInteractor(currentQuery: \(currentQuery), currentPage: \(currentPage), totalPages: \(totalPages), isLoadingNextPage: \(isLoadingNextPage), currentTask: \(currentTask), feedService: \(feedService), presenter: \(presenter))"
     }
 }
 
