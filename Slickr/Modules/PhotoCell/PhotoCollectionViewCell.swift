@@ -43,7 +43,6 @@ final class PhotoCollectionViewCell: UICollectionViewCell, PhotoCellInput {
 
         layer.cornerRadius = 5.0
         layer.masksToBounds = true
-        backgroundColor = UIColor(red: 0.96, green: 0.90, blue: 0.55, alpha: 1.0)
 
         set(state: currentState)
     }
