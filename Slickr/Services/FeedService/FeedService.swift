@@ -19,6 +19,7 @@ final class DefaultFeedService: FeedService {
         self.imageURLBuilder = imageURLBuilder
     }
 
+    @discardableResult
     func search(with query: String, page: UInt, completion: @escaping (Result<FeedPage, Error>) -> Void) -> Cancelable? {
         let requestCompletion: FlickrPhotosResponseHandler = { result in
             switch result {

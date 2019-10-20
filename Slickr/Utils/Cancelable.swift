@@ -9,4 +9,5 @@ protocol Cancelable: AnyObject {
     func cancel()
 }
 
-extension URLSessionTask: Cancelable {}
+extension URLSessionTask: Cancelable {
+}

@@ -15,6 +15,7 @@
 		F804414A7A60BE82F4C5282D /* SearchScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044F513FB1FDC6A17B22AE /* SearchScreenFactory.swift */; };
 		F804418842364A294261FEB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80444800C611CC32D949708 /* LaunchScreen.storyboard */; };
 		F80441B79DFCC3F59BC5F154 /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044C584D281289765FB8CD /* PhotoInfo.swift */; };
+		F804423061CD22075A5D100B /* MockedPhotoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044203B103CE7E8ECE4EEC /* MockedPhotoCellPresenter.swift */; };
 		F804426ED13D140032F0F1AE /* DefaultImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80441096A8B233CE378CD12 /* DefaultImageServiceTests.swift */; };
 		F80442840E014AB13D0C3EDE /* DefaultFeedServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F804407D76773D140E00B533 /* DefaultFeedServiceTests.swift */; };
 		F80442C04A635BEB31A4E4CF /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044DEA836FFE1A37BB29F1 /* ImageService.swift */; };
@@ -31,6 +32,7 @@
 		F804493D96786222E13D2B6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8044E5293133E01E9C3EE5B /* Assets.xcassets */; };
 		F8044958517CD9D65142D04A /* ImageURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F804479C26FF2642B1B88C24 /* ImageURLBuilder.swift */; };
 		F80449EBF47304708648CCA5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80446496C4E90D14F25320C /* main.swift */; };
+		F8044A1D90F08940648A8C00 /* example-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8044DC9FCA6072C64ACB13C /* example-image.jpg */; };
 		F8044A81D03AD1B7FAFB848D /* MockedSearchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044122E103E5DADF619183 /* MockedSearchScreenPresenter.swift */; };
 		F8044AE613B1826890C8A372 /* DefaultNetworkEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80444A24CF93E5D1CAF3CE6 /* DefaultNetworkEngineTests.swift */; };
 		F8044B4CE13DB728079A6292 /* FlickrDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80441CB4BAC063F9D438B3D /* FlickrDataSource.swift */; };
@@ -40,6 +42,7 @@
 		F8044CB18ADF034277519616 /* DefaultImageURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044AE0B5D93AEF06040E03 /* DefaultImageURLBuilderTests.swift */; };
 		F8044CB7AC89961121EA2E15 /* recent.json in Resources */ = {isa = PBXBuildFile; fileRef = F80448E7C8AF0F6B4FEC0A19 /* recent.json */; };
 		F8044CBFB489C849114E390A /* CancelableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044ED3149365A2F28D9F5A /* CancelableMock.swift */; };
+		F8044D17480B0A593528E443 /* MockedImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044F99BA6BFFEF39F1B252 /* MockedImageService.swift */; };
 		F8044D3308796C899E7EAF15 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80441D6F83FF285C9FDE5DD /* PhotoCollectionViewCell.swift */; };
 		F8044D54366624D4B4929C3C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044EAD0D708910DEBCAC10 /* Dependencies.swift */; };
 		F8044D76FA4EBAB328FDAF08 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044CD39E49EBEC54D52CFB /* Constants.swift */; };
@@ -47,6 +50,7 @@
 		F8044E4FCFB7636306F13667 /* PhotoCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80443BA51A1F1723AEEF463 /* PhotoCellInteractor.swift */; };
 		F8044E89CCDB35714A468C60 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F804485B7EFA8EAFD94B1A64 /* Presentable.swift */; };
 		F8044EA48D3E923B7ABF4436 /* DefaultFlickrDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044494B3AF4C23EB563FAB /* DefaultFlickrDataSourceTests.swift */; };
+		F8044F452C2EF8860FE667AF /* DefaultPhotoCellInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8044420113605CA28ED18B4 /* DefaultPhotoCellInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,11 +75,13 @@
 		F80441741ED8C016123CABD0 /* DefaultSearchScreenInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSearchScreenInteractorTests.swift; sourceTree = "<group>"; };
 		F80441CB4BAC063F9D438B3D /* FlickrDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrDataSource.swift; sourceTree = "<group>"; };
 		F80441D6F83FF285C9FDE5DD /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8044203B103CE7E8ECE4EEC /* MockedPhotoCellPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedPhotoCellPresenter.swift; sourceTree = "<group>"; };
 		F8044235FFAC18B844986AF7 /* PhotoCellPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellPresenter.swift; sourceTree = "<group>"; };
 		F8044298E584B0F9CC134DF8 /* FeedPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPage.swift; sourceTree = "<group>"; };
 		F80443231F96D229FDB95FC7 /* MockedNetworkEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedNetworkEngine.swift; sourceTree = "<group>"; };
 		F80443BA51A1F1723AEEF463 /* PhotoCellInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellInteractor.swift; sourceTree = "<group>"; };
 		F804440F92C7B896C5D9438E /* MockedFlickrDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedFlickrDataSource.swift; sourceTree = "<group>"; };
+		F8044420113605CA28ED18B4 /* DefaultPhotoCellInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPhotoCellInteractorTests.swift; sourceTree = "<group>"; };
 		F80444800C611CC32D949708 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8044494B3AF4C23EB563FAB /* DefaultFlickrDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultFlickrDataSourceTests.swift; sourceTree = "<group>"; };
 		F80444A24CF93E5D1CAF3CE6 /* DefaultNetworkEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNetworkEngineTests.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 		F8044C40ED75A35E37DE96A3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8044C584D281289765FB8CD /* PhotoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInfo.swift; sourceTree = "<group>"; };
 		F8044CD39E49EBEC54D52CFB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F8044DC9FCA6072C64ACB13C /* example-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "example-image.jpg"; sourceTree = "<group>"; };
 		F8044DEA836FFE1A37BB29F1 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		F8044E0BB248AEBB86C18636 /* RequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestInfo.swift; sourceTree = "<group>"; };
 		F8044E5293133E01E9C3EE5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,6 +111,7 @@
 		F8044ED3149365A2F28D9F5A /* CancelableMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelableMock.swift; sourceTree = "<group>"; };
 		F8044F19B432D7F04F5E7EE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		F8044F513FB1FDC6A17B22AE /* SearchScreenFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchScreenFactory.swift; sourceTree = "<group>"; };
+		F8044F99BA6BFFEF39F1B252 /* MockedImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +263,7 @@
 			children = (
 				F8044DEA836FFE1A37BB29F1 /* ImageService.swift */,
 				F80441096A8B233CE378CD12 /* DefaultImageServiceTests.swift */,
+				F8044F99BA6BFFEF39F1B252 /* MockedImageService.swift */,
 			);
 			path = ImageService;
 			sourceTree = "<group>";
@@ -287,6 +296,8 @@
 				F80443BA51A1F1723AEEF463 /* PhotoCellInteractor.swift */,
 				F8044235FFAC18B844986AF7 /* PhotoCellPresenter.swift */,
 				F8044718FCDD9EF17E605B55 /* PhotoCellFactory.swift */,
+				F8044420113605CA28ED18B4 /* DefaultPhotoCellInteractorTests.swift */,
+				F8044203B103CE7E8ECE4EEC /* MockedPhotoCellPresenter.swift */,
 			);
 			path = PhotoCell;
 			sourceTree = "<group>";
@@ -296,6 +307,7 @@
 			children = (
 				F80448B50212160918E376CF /* search.json */,
 				F80448E7C8AF0F6B4FEC0A19 /* recent.json */,
+				F8044DC9FCA6072C64ACB13C /* example-image.jpg */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -402,6 +414,7 @@
 			files = (
 				F8044C5D482D36314385E220 /* search.json in Resources */,
 				F8044CB7AC89961121EA2E15 /* recent.json in Resources */,
+				F8044A1D90F08940648A8C00 /* example-image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +468,9 @@
 				F8044CBFB489C849114E390A /* CancelableMock.swift in Sources */,
 				F8044A81D03AD1B7FAFB848D /* MockedSearchScreenPresenter.swift in Sources */,
 				F8044BFF11AF71D797A2F382 /* MockedFeedService.swift in Sources */,
+				F8044F452C2EF8860FE667AF /* DefaultPhotoCellInteractorTests.swift in Sources */,
+				F8044D17480B0A593528E443 /* MockedImageService.swift in Sources */,
+				F804423061CD22075A5D100B /* MockedPhotoCellPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

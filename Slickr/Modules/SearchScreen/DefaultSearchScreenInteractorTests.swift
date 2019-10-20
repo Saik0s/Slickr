@@ -21,7 +21,6 @@ final class DefaultSearchScreenInteractorTests: XCTestCase {
         interactor = DefaultSearchScreenInteractor(feedService: feedService, presenter: presenter)
     }
 
-
     func test_loadNextPage_twice_shouldPerformOneRequest() {
         let presenterExpectation = expectation(description: "Wait for search results")
         presenter.loadedNewPage = { _ in presenterExpectation.fulfill() }

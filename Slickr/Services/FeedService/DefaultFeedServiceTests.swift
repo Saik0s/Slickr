@@ -18,13 +18,13 @@ final class DefaultFeedServiceTests: XCTestCase {
     }
 
     func test_search_withEmptyQuery_shouldCallRecent() {
-        feedService.search(with: "", page: 1) { _ in  }
+        feedService.search(with: "", page: 1) { _ in }
         XCTAssert(dataSource.invokedRecent)
         XCTAssertFalse(dataSource.invokedSearch)
     }
 
     func test_search_withCorrectQuery_shouldCallSearch() {
-        feedService.search(with: "flower", page: 1) { _ in  }
+        feedService.search(with: "flower", page: 1) { _ in }
         XCTAssert(dataSource.invokedSearch)
         XCTAssertFalse(dataSource.invokedRecent)
     }

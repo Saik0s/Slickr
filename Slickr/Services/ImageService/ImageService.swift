@@ -6,6 +6,7 @@
 import Foundation
 
 protocol ImageService: AnyObject {
+    @discardableResult
     func loadImage(for photoInfo: PhotoInfo, completion: @escaping (Result<Data, Error>) -> Void) -> Cancelable?
 }
 
@@ -23,6 +24,7 @@ final class DefaultImageService: ImageService {
         self.networkEngine = networkEngine
     }
 
+    @discardableResult
     func loadImage(for photoInfo: PhotoInfo, completion: @escaping (Result<Data, Swift.Error>) -> Void) -> Cancelable? {
         // Try to get cached first
         if let data = imageCache.object(forKey: photoInfo.url as AnyObject) as? Data {

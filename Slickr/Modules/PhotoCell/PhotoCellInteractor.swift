@@ -25,6 +25,7 @@ final class DefaultPhotoCellInteractor: PhotoCellInteractor {
         // Cancel previous task
         currentTask?.cancel()
 
+        // Request a new image from image service
         currentTask = imageService.loadImage(for: photoInfo) { [weak self] result in
             self?.currentTask = nil
 

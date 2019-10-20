@@ -34,6 +34,7 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         self.networkEngine = networkEngine
     }
 
+    @discardableResult
     func search(with query: String, limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         guard !query.isEmpty else {
             completion(.failure(FlickrError.emptySearchQuery))
@@ -46,6 +47,7 @@ final class DefaultFlickrDataSource: FlickrDataSource {
         return getPhotos(parameters: parameters, completion: completion)
     }
 
+    @discardableResult
     func recent(limit: UInt, page: UInt, completion: @escaping FlickrPhotosResponseHandler) -> Cancelable? {
         let parameters = baseParameters(method: Methods.recent, limit: limit, page: page)
 
@@ -55,7 +57,7 @@ final class DefaultFlickrDataSource: FlickrDataSource {
     // MARK: - Private Helpers
 
     private var baseParameters: [String: Any] {
-        return [
+        [
             "api_key": Constants.Flickr.APIKey,
             "format": "json",
             "media": "photos",

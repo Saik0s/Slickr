@@ -10,5 +10,5 @@ protocol Presentable: AnyObject {
 }
 
 extension UIViewController: Presentable {
-    var asViewController: UIViewController { return self }
+    var asViewController: UIViewController { self }
 }
